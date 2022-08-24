@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{81C002E9-CE34-4C8E-911B-2BFB78408A9B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>StrategyEngine</RootNamespace>
+    <AssemblyName>TVEEngine</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attributes\ActionAttribute.cs" />
+    <Compile Include="Attributes\ResourceCostAttribute.cs" />
+    <Compile Include="Attributes\ConstraintAttribute.cs" />
+    <Compile Include="Attributes\ConstraintGeneratorAttribute.cs" />
+    <Compile Include="Attributes\ConstructionAttribute.cs" />
+    <Compile Include="Attributes\MaxLevelAttribute.cs" />
+    <Compile Include="Constants\ExceptionTexts.cs" />
+    <Compile Include="ContextFactory.cs" />
+    <Compile Include="Delegates\MapperDelegates.cs" />
+    <Compile Include="Enums\RequirementType.cs" />
+    <Compile Include="Exceptions\FormattedException.cs" />
+    <Compile Include="Exceptions\InternalEngineException.cs" />
+    <Compile Include="Interfaces\IAction.cs" />
+    <Compile Include="Interfaces\IConstraint.cs" />
+    <Compile Include="Interfaces\IConstruction.cs" />
+    <Compile Include="Interfaces\IConstructionBearer.cs" />
+    <Compile Include="Interfaces\IConstructionProperty.cs" />
+    <Compile Include="Interfaces\IResourceBearer.cs" />
+    <Compile Include="Interfaces\IUserContext.cs" />
+    <Compile Include="Models\Actions\BaseAction.cs" />
+    <Compile Include="Models\Actions\CreateAction.cs" />
+    <Compile Include="Models\Actions\DynamicAction.cs" />
+    <Compile Include="Models\Actions\MethodAction.cs" />
+    <Compile Include="Models\BaseConstruction.cs" />
+    <Compile Include="Models\Constraints\ConstraintComposite.cs" />
+    <Compile Include="Models\Constraints\DynamicConstraint.cs" />
+    <Compile Include="Models\Constraints\LevelSegmentConstraint.cs" />
+    <Compile Include="Models\UpgradableConstruction.cs" />
+    <Compile Include="Models\Constraints\ConstructionLimitConstraint.cs" />
+    <Compile Include="Models\Constraints\RequirementConstraint.cs" />
+    <Compile Include="Models\Constraints\ResourceConstraint.cs" />
+    <Compile Include="Models\Implementations\ConstructionStorage.cs" />
+    <Compile Include="Models\Implementations\Context.cs" />
+    <Compile Include="Models\Implementations\ResourceStorage.cs" />
+    <Compile Include="Models\MainBuilder.cs" />
+    <Compile Include="Models\Properties\LevelProperty.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

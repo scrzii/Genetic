@@ -1,0 +1,12 @@
+﻿[
+    {
+        "name": "Tent",
+        "multipleBuilding": false,
+        "upgrades": {
+            "0": {
+                "gold": 0,
+                "lumber": 0
+            }
+        }
+    }
+]
