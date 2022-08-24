@@ -20,8 +20,7 @@ namespace StrategyEngine.Models.Constraints
 
         public bool Verify(IUserContext context, IConstruction target)
         {
-            var constraint = (IConstraint)_generator.Invoke(target, new object[] { context });
-            return constraint.Verify(context, target);
+            return (bool)_generator.Invoke(target, new object[] { context });
         }
     }
 }

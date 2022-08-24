@@ -32,9 +32,9 @@ namespace StrategyEngine.Models.Actions
         #region Private methods
         private void UpdateConstraints()
         {
-            _constraints = new List<IConstraint> 
-            { 
-                (IConstraint)_generator.Invoke(Target, new object[] { _context, Target }) 
+            _constraints = new List<IConstraint>
+            {
+                new DynamicConstraint(_generator)
             };
         }
         #endregion

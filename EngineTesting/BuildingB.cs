@@ -1,4 +1,5 @@
 ﻿using StrategyEngine.Attributes;
+using StrategyEngine.Interfaces;
 using StrategyEngine.Models;
 using StrategyEngine.Models.Implementations;
 using System;
@@ -20,6 +21,12 @@ namespace StrategyEngine
         public void Add100Gold(Context context)
         {
             context.ResourcesChangeable.Income("gold", 100);
+        }
+
+        [ConstraintGenerator(nameof(Add100Gold))]
+        public bool MaxGoldConstraintGenerator(IUserContext context)
+        {
+            return context.Resources.GetAmount("gold") < 2000;
         }
     }
 }
