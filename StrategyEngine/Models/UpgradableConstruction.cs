@@ -16,34 +16,55 @@ namespace StrategyEngine.Models
 {
     public abstract class UpgradableConstruction : BaseConstruction
     {
-        private int _maxLevel;
+        private readonly int _startLevelUpgrade = 2;
 
-        public UpgradableConstruction(Context context, int maxLevel = 1) : base(context)
+        protected Dictionary<int, Upgrade> _upgrades;
+
+        public UpgradableConstruction()
         {
-            _maxLevel = maxLevel;
             SetProperty(new LevelProperty(1));
-            SetConstraintGenerator(Upgrade, UpgradeConstraintGenerator);
         }
 
         [Action]
         public void Upgrade(Context context)
         {
-            var level = GetProperty<LevelProperty>();
-            if (level == null)
-            {
-                throw new Exception(ExceptionTexts.HasNotLevelProperty);
-            }
+            var upgrade = GetUpgrade();
+            upgrade.Spend(context);
 
-            level.Value++;
+            var property = GetProperty<LevelProperty>();
+            property.Value++;
         }
 
         [Action]
         public void Destroy(Context context)
         {
-            context.ConstructionsChangeable.RemoveConstruction(this);
+            context.ConstructionsChangeable.RemoveConstruction(GetType(), this);
         }
 
-        [ConstraintGenerator(nameof(Destroy))]
-        protected abstract IConstraint UpgradeConstraintGenerator(IUserContext context, IConstruction target);
+        [ConstraintGenerator(nameof(Upgrade))]
+        public bool UpgradeActionGenerator(IUserContext context)
+        {
+            var nextLevel = GetProperty<LevelProperty>().Value + 1;
+            if (!_upgrades.ContainsKey(nextLevel))
+            {
+                return false;
+            }
+
+            return GetUpgrade().Constraint.Verify(context, this);
+        }
+
+        protected void SetUpgrades(params Upgrade[] upgrades)
+        {
+            _upgrades = Enumerable.Range(_startLevelUpgrade, upgrades.Length)
+                .ToDictionary(_ => _, _ => upgrades[_ - _startLevelUpgrade]);
+        }
+
+        #region Private methods
+        private Upgrade GetUpgrade()
+        {
+            var nextLevel = GetProperty<LevelProperty>().Value + 1;
+            return _upgrades[nextLevel];
+        }
+        #endregion
     }
 }

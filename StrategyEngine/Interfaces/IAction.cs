@@ -11,7 +11,7 @@ namespace StrategyEngine.Interfaces
     {
         string ActionName { get; }
 
-        bool CanExecute();
-        void Execute();
+        bool CanExecute(IUserContext context);
+        void Execute(Context context);
     }
 }

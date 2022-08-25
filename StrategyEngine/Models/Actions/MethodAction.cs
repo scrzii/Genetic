@@ -19,9 +19,9 @@ namespace StrategyEngine.Models.Actions
             _method = method;
         }
 
-        public override void ExecuteSafely()
+        public override void ExecuteSafely(Context context)
         {
-            _method.Invoke(Target, new object[] { Target.Context });
+            _method.Invoke(Target, new object[] { context });
         }
     }
 }

@@ -37,9 +37,19 @@ namespace StrategyEngine.Models.Implementations
             }
         }
 
+        public IEnumerable<IAction> GetAvailableActions()
+        {
+            return GetActions().Where(_ => _.CanExecute(this));
+        }
+
         public IEnumerable<IAction> GetActions()
         {
             return Constructions.GetConstructions().SelectMany(_ => _.GetActions(this));
+        }
+
+        public void ExecuteAction(IAction action)
+        {
+            action.Execute(this);
         }
     }
 }

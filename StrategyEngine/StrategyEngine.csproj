@@ -77,6 +77,7 @@
     <Compile Include="Models\Implementations\ResourceStorage.cs" />
     <Compile Include="Models\MainBuilder.cs" />
     <Compile Include="Models\Properties\LevelProperty.cs" />
+    <Compile Include="Models\Upgrade.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

@@ -11,5 +11,7 @@ namespace StrategyEngine.Interfaces
         IResourceBearer Resources { get; }
         IConstructionBearer Constructions { get; }
         IEnumerable<IAction> GetActions();
+        IEnumerable<IAction> GetAvailableActions();
+        void ExecuteAction(IAction action);
     }
 }

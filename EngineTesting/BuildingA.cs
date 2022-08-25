@@ -14,10 +14,6 @@ namespace StrategyEngine
     [ResourceCost("gold", 1000)]
     public class BuildingA : BaseConstruction
     {
-        public BuildingA(Context context) : base(context)
-        {
-        }
-
         [Action]
         public void WriteHelloWorld(Context context)
         {

@@ -15,7 +15,7 @@ namespace StrategyEngine.Models
 {
     public class MainBuilder : BaseConstruction
     {
-        public MainBuilder(Context context, Assembly assembly) : base(context)
+        public MainBuilder(Assembly assembly)
         {
             InitActions(assembly);
         }

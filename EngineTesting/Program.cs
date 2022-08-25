@@ -29,7 +29,7 @@ namespace StrategyEngine
 
         public void ExecuteAction(int index)
         {
-            _actions[index].Execute();
+            _context.ExecuteAction(_actions[index]);
             UpdateActions();
         }
 
@@ -47,7 +47,7 @@ namespace StrategyEngine
 
         private void UpdateActions()
         {
-            _actions = _context.GetActions().ToList();
+            _actions = _context.GetAvailableActions().ToList();
         }
     }
 

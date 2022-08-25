@@ -37,7 +37,11 @@ namespace StrategyEngine.Models.Implementations
 
         public void AddConstruction<T>(T construction) where T : IConstruction
         {
-            var type = typeof(T);
+            AddConstruction(typeof(T), construction);
+        }
+
+        public void AddConstruction(Type type, IConstruction construction)
+        {
             if (!IsRegistered(type))
             {
                 _container[type] = new List<IConstruction>();
@@ -45,17 +49,21 @@ namespace StrategyEngine.Models.Implementations
             _container[type].Add(construction);
         }
 
-        public void RemoveConstruction<T>(T construction) where T : IConstruction
+        public void RemoveConstruction(Type type, IConstruction construction)
         {
-            AssertRegistered<T>();
+            AssertRegistered(type);
 
-            var type = typeof(T);
             _container[type].Remove(construction);
 
             if (!_container[type].Any())
             {
                 _container.Remove(type);
             }
+        }
+
+        public void RemoveConstruction<T>(T construction) where T : IConstruction
+        {
+            RemoveConstruction(typeof(T), construction);
         }
 
         public IEnumerable<Type> GetTypes()

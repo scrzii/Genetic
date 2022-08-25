@@ -16,7 +16,7 @@ namespace StrategyEngine
         {
             var result = new Context(resources);
             var assembly = Assembly.GetCallingAssembly();
-            result.ConstructionsChangeable.AddConstruction(new MainBuilder(result, assembly));
+            result.ConstructionsChangeable.AddConstruction(new MainBuilder(assembly));
             return result;
         }
     }

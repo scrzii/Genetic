@@ -23,9 +23,9 @@ namespace StrategyEngine.Models.Actions
             _generator = generator;
         }
 
-        public override void ExecuteSafely()
+        public override void ExecuteSafely(Context context)
         {
-            _action.ExecuteSafely();
+            _action.ExecuteSafely(context);
             UpdateConstraints();
         }
 

@@ -16,13 +16,6 @@ namespace StrategyEngine.Models.Actions
         public string ActionName { get; set; }
 
         protected List<IConstraint> _constraints;
-        protected Context _context
-        {
-            get
-            {
-                return Target.Context;
-            }
-        }
 
         public BaseAction(BaseConstruction target, params IConstraint[] constraints)
         {
@@ -31,21 +24,21 @@ namespace StrategyEngine.Models.Actions
             ActionName = $"{nameof(BaseAction)}_{target.Name}";
         }
 
-        public bool CanExecute()
+        public bool CanExecute(IUserContext context)
         {
-            return _constraints.All(_ => _.Verify(Target.Context, Target));
+            return _constraints.All(_ => _.Verify(context, Target));
         }
 
-        public void Execute()
+        public void Execute(Context context)
         {
-            if (!CanExecute())
+            if (!CanExecute(context))
             {
                 throw new InternalEngineException(ExceptionTexts.ProhibitedAction);
             }
 
-            ExecuteSafely();
+            ExecuteSafely(context);
         }
 
-        public abstract void ExecuteSafely();
+        public abstract void ExecuteSafely(Context context);
     }
 }

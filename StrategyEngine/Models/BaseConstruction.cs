@@ -18,7 +18,6 @@ namespace StrategyEngine.Models
 {
     public abstract class BaseConstruction : IConstruction
     {
-        public Context Context { get; }
         public string Name { get; }
 
         protected Dictionary<Type, IConstructionProperty> _properties;
@@ -26,10 +25,9 @@ namespace StrategyEngine.Models
         protected List<IAction> _actions;
         private Dictionary<string, ConstraintGeneratorDelegate> _constraintGenerators;
 
-        public BaseConstruction(Context context, [CallerMemberName]string name = null)
+        public BaseConstruction([CallerMemberName]string name = null)
         {
             Name = GetConstructionName();
-            Context = context;
 
             _properties = new Dictionary<Type, IConstructionProperty>();
             _actions = GetCustomActions().ToList();
@@ -38,7 +36,7 @@ namespace StrategyEngine.Models
 
         public IEnumerable<IAction> GetActions(IUserContext context)
         {
-            return _actions.Where(_ => _.CanExecute());
+            return _actions;
         }
 
         public T GetProperty<T>() where T : IConstructionProperty
